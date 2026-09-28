@@ -14,9 +14,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm install --no-audit --no-fund
+      - run: corepack enable && corepack pnpm install --no-frozen-lockfile
       - name: Plain Vitest control
-        run: npx vitest run good.test.mjs bad.test.mjs
+        run: corepack pnpm exec vitest run good.test.mjs bad.test.mjs
 
   vm6-vitest-collision:
     name: vm6-vitest-collision
@@ -26,9 +26,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm install --no-audit --no-fund
+      - run: corepack enable && corepack pnpm install --no-frozen-lockfile
       - name: Production-backed Mergify quarantine run
         env:
           MERGIFY_TOKEN: ${{ github.token }}
           MERGIFY_API_URL: https://api.mergify.com
-        run: npx vitest run -c vitest.mergify.config.mjs
+        run: corepack pnpm exec vitest run -c vitest.mergify.config.mjs
