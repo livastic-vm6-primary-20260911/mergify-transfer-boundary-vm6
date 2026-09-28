@@ -1,0 +1,11 @@
+pull_request_rules:
+  - name: VM6 Vitest cross-file collision protected-main impact
+    conditions:
+      - title = VM6_VITEST_CROSSFILE_PROD_IMPACT_20260929
+      - author = livastic-vm6-primary-20260911
+      - "#files = 1"
+      - files = bad.test.mjs
+      - check-success = @github-actions/vm6-vitest-collision
+    actions:
+      merge:
+        method: merge
